@@ -69,7 +69,7 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.5</version>
 				<configuration>
-					<skip>${skipTests}</skip>
+					<skip>false</skip>
 					<excludes>
 						<exclude>java/lang/*</exclude>
 						<exclude>java/util/*</exclude>
@@ -130,7 +130,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<argLine>${surefireArgs} -Xms1024m -Xmx1024m -XX:MaxPermSize=256m</argLine>
+					<argLine>-Xms1024m -Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<excludes>
 						<exclude>**/*IT.java</exclude>
 						<exclude>**/*ST.java</exclude>
@@ -214,7 +214,7 @@
 						<avoidCallsTo>java.util.*</avoidCallsTo>
 						<avoidCallsTo>java.lang.*</avoidCallsTo>
 					</avoidCallsTo>
-					<skip>${skipTests}</skip>
+					<skip>false</skip>
 					<outputFormats>
 						<format>HTML</format>
 						<format>XML</format>
@@ -244,7 +244,7 @@
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>3.0.0-M3</version>
 				<configuration>
-					<argLine>${failsafeArgs} -Xms1024m -Xmx1024m -XX:MaxPermSize=256m</argLine>
+					<argLine>-Xms1024m -Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<properties>
 						<configurationParameters> <!-- Due to use of @MockBean: https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#testcontext-parallel-test-execution -->
 							junit.jupiter.execution.parallel.enabled=false
@@ -314,8 +314,19 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<dependencies>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.4.0</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -496,6 +507,16 @@
 			<groupId>io.github.git-commit-id</groupId>
 			<artifactId>git-commit-id-maven-plugin</artifactId>
 			<version>4.9.9</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.retrofit2</groupId>
+			<artifactId>converter-jackson</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>3.11.0</version>
 		</dependency>
 	</dependencies>
 </project>
