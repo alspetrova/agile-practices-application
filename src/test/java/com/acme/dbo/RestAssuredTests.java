@@ -7,33 +7,33 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.http.ContentType.*;
 import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.*;
 
 
 public class RestAssuredTests {
-    RequestSpecification request;
+    private RequestSpecification request;
 
     @BeforeEach
     public void init() {
-        request =
-                given()
-                        .baseUri("http://localhost")
-                        .port(8080)
-                        .basePath("/dbo/api/")
-                        .header("X-API-VERSION", 1)
-                        .contentType(ContentType.JSON);
+        request = given()
+                .baseUri("http://localhost")
+                .port(8080)
+                .basePath("/dbo/api/")
+                .header("X-API-VERSION", 1)
+                .contentType(JSON);
     }
 
     @Test
     @DisplayName("GET client by Exist id")
     public void shouldGetClientByExistId() {
-        request.when()
+        request
+                .when()
                 .get("/client/{id}", 2)
                 .then()
                 .statusCode(SC_OK)
-                .body("id", is(2),
-                        "login", is("account@acme.com"));
+                .body("id", is(2), "login", is("account@acme.com"));
     }
 
     @Test
@@ -49,12 +49,12 @@ public class RestAssuredTests {
                 .post("/client")
                 .then().statusCode(SC_CREATED);
 
-        request.when()
+        request
+                .when()
                 .delete("/client/login/{login}", "deleted@email.com")
                 .then()
                 .statusCode(SC_OK);
     }
-
 }
 
 

@@ -49,10 +49,9 @@ public class RetrofitClientTests {
     @Test
     @DisplayName("GET all clients")
     public void shouldGetAllClients() throws IOException {
-        service.getClients().execute().body().forEach(System.out::println);
         Response<List<Client>> execute = service.getClients().execute();
         assertEquals(SC_OK, execute.code());
-        int size = service.getClients().execute().body().size();
+        int size = execute.body().size();
         assertTrue(size > 3);
     }
 }
