@@ -3,16 +3,20 @@ package com.acme.dbo.retrofit;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.annotation.processing.Generated;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+import javax.persistence.*;
 
+@Entity
+@Table(name = "CLIENT")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 
 @Generated("jsonschema2pojo")
 public class Client {
-    @JsonProperty("id")
-    @JsonPropertyDescription("Client id")
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @JsonProperty("login")
@@ -27,9 +31,11 @@ public class Client {
     @JsonPropertyDescription("Client secret")
     private String secret;
 
+
+
     @JsonProperty("created")
     @JsonPropertyDescription("Client created")
-    private String created;
+    private LocalDateTime created;
 
     @JsonProperty("enabled")
     @JsonPropertyDescription("Client enabled")
@@ -38,10 +44,13 @@ public class Client {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Client(@JsonProperty("login") String login, @JsonProperty("salt") String salt, @JsonProperty("secret") String secret) {
+    public Client(@JsonProperty("login") String login, @JsonProperty("salt") String salt, @JsonProperty("secret") String secret,
+                  LocalDateTime created, Boolean enabled) {
         this.login = login;
         this.salt = salt;
         this.secret = secret;
+        this.created = created;
+        this.enabled = enabled;
     }
 
     @JsonProperty("login")
@@ -72,6 +81,22 @@ public class Client {
     @JsonProperty("secret")
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 
     @Override

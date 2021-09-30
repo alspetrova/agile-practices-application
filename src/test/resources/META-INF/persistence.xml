@@ -1,0 +1,21 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="dbo" transaction-type="RESOURCE_LOCAL">
+
+        <description>Hibernate test case template Persistence Unit</description>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/dbo-db;create=true"/>
+            <property name="hibernate.connection.username" value="APP"/>
+            <property name="hibernate.connection.password" value="APP"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+        </properties>
+    </persistence-unit>
+</persistence>

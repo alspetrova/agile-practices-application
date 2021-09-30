@@ -42,7 +42,7 @@ public class RestAssuredTests {
         request
                 .when()
                 .body("{\n" +
-                        " \"login\": \"deleted@email.com\",\n" +
+                        " \"login\": \"u7ljdajLNo7PsVw7\",\n" +
                         " \"salt\": \"somesalt\",\n" +
                         " \"secret\": \"749f09bade8aca749f09bade8aca7556\"\n" +
                         "}")
